@@ -1,6 +1,7 @@
 #ifndef ClockDisplay_h
 #define ClockDisplay_h
 
+#include <Arduino.h>
 #include <TM1637.h>
 
 namespace ClockDisplay {

@@ -1,6 +1,8 @@
 #ifndef Recipe_h
 #define Recipe_h
 
+#include <Arduino.h>
+
 namespace Recipe {
   byte pgm1[] = {2, 1, 5};
   byte pgm2[] = {2, 4, 0};
