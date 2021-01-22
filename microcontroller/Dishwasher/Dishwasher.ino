@@ -14,7 +14,7 @@
 int state;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   // set the on/off pin 
   OnOffButton::setup();
   // set the selector pins and led
@@ -92,12 +92,9 @@ void loop() {
         state = STATE_DONE;
       } else {
         Recipe::work(Recipe::pgm);
-        // TODO: need this to clear the 1 after 1:00 - 0:59
-        // TODO: also clears the 1 after :10 - :09
-        ClockDisplay::flash_off();
-        ClockDisplay::flash_on(Recipe::pgm);
+        ClockDisplay::flash_on(Recipe::pgm, true);
         int val = Recipe::pgm[0]*100 + Recipe::pgm[1]*10 + Recipe::pgm[2];
-        if (val <= 1) {
+        if (val < 1) {
           state = STATE_DONE;
         }
         delay(200);

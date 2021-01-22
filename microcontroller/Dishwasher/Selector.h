@@ -19,7 +19,9 @@ namespace Selector
   // ref: 10k
   // val: 4k7, 2k2, 1k, 470, 20, 100
   // cal: ref over ref+val * 1024 (ADC) 
-  int buttonMap[NUM_BUTTONS] = {695, 838, 930, 977, 1002, 1014};
+//  int buttonMap[NUM_BUTTONS] = {695, 838, 930, 977, 1002, 1014};
+  int buttonMap[NUM_BUTTONS] = {675, 805, 890, 930, 950, 965};
+  int buttonDelta[NUM_BUTTONS] = {10, 10, 10, 10, 8, 8};
 
   int selectPin = A0;
 
@@ -32,7 +34,7 @@ namespace Selector
       int ref = buttonMap[i];
       int delta = raw-ref;
       if (delta < 0) delta = -delta;
-      if (delta < 5) {
+      if (delta <= buttonDelta[i]) {
         buttonPressed = i+1;
         break;
       }

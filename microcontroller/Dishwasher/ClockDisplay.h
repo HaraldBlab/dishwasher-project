@@ -16,7 +16,7 @@ namespace ClockDisplay {
   void off()
   {
     tm.colonOff();
-    tm.clearScreen();
+    tm.display("    ", false, false, 0);
   }
 
   void setup() {
@@ -26,10 +26,22 @@ namespace ClockDisplay {
     off();
   }
 
-  void flash_on(byte bit[3]) {
+  void flash_on(byte bit[3], bool leading=false) {
     int val = bit[0]*100 + bit[1]*10 + bit[2];
+    String val_string(val);
+    String to_display("    ");
+    if (leading) {
+      if (val_string.length() == 3)
+        to_display.replace("    ", " ");
+      if (val_string.length() == 2)
+        to_display.replace("    ", " 0");
+      if (val_string.length() == 1)
+        to_display.replace("    ", " 00");
+    } else
+      to_display.remove(0, val_string.length());
+    to_display.concat(val_string);
     tm.colonOn();
-    tm.display(val, false, false, 0);
+    tm.display(to_display, false, false, 0);
   }
   void flash_off() {
     off();
